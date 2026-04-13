@@ -40,6 +40,17 @@ export default async function Home() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+        {products.length === 0 && (
+          <div className="rounded-2xl border border-dashed border-zinc-300 bg-zinc-50 p-8 text-center dark:border-zinc-700 dark:bg-zinc-900/40">
+            <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+              Products are temporarily unavailable.
+            </p>
+            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+              Please refresh in a moment. The API may be waking up or rate
+              limited.
+            </p>
+          </div>
+        )}
       </section>
     </div>
   );

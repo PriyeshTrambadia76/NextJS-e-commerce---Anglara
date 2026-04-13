@@ -3,13 +3,17 @@ import type { Product } from "@/lib/types/product";
 const BASE = "https://fakestoreapi.com";
 
 export async function getProducts(): Promise<Product[]> {
-  const res = await fetch(`${BASE}/products`, {
-    next: { revalidate: 3600 },
-  });
-  if (!res.ok) {
-    throw new Error("Failed to load products");
+  try {
+    const res = await fetch(`${BASE}/products`, {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) {
+      return [];
+    }
+    return res.json() as Promise<Product[]>;
+  } catch {
+    return [];
   }
-  return res.json() as Promise<Product[]>;
 }
 
 export async function getProduct(id: number): Promise<Product> {
